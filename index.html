@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=yes">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css" />
+    <title>Scroller</title>
+</head>
+<body>
+
+<div id="background" class="layer"></div>
+<div id="backgroundSprites" class="layer"></div>
+<div id="enemySprites" class="layer"></div>
+
+<div id="hero"></div>
+
+<div id="title" class="overlayContainer">
+    PhoneGap: Legends
+</div>
+
+
+<div id="hud" class="overlayContainer">
+    <table>
+        <tr>
+            <td></td>
+            <td class="stats" style="font-size: 0.8em;">HP</td>
+        </tr>
+        <tr class="active">
+            <td>Trice</td>
+            <td class="stats">240/300</td>
+        </tr>
+        <tr>
+            <td>Coenraets</td>
+            <td class="stats">270/350</td>
+        </tr>
+        <tr>
+            <td>Schinsky</td>
+            <td class="stats">260/390</td>
+        </tr>
+        <tr>
+            <td>Wilson</td>
+            <td class="stats">999/999</td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="controls" class="layer">
+    <div id="touchSegment0" class="touchSegment"></div>
+    <div id="touchSegment1" class="touchSegment"></div>
+    <div id="compass"></div>
+    <div id="touch"></div>
+</div>
+
+
+
+</body>
+
+
+<script src="js/raf.js"></script>
+<script src="cordova-2.5.0.js"></script>
+<script src="js/zepto.js"></script>
+<script src="js/index.js"></script>
+</html>
