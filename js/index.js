@@ -89,6 +89,12 @@ var translate = {
 
 var $win;
 
+window.onerror = function(error) {
+    alert(error.toString());
+    console.log(error);
+};
+
+
 function generateWorld(){
 
     world.$el.empty();
