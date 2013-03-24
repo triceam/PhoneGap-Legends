@@ -89,8 +89,9 @@ var translate = {
 
 var $win;
 
+
 window.onerror = function(error) {
-    alert(error.toString());
+//    alert(error.toString());
     console.log(error);
 };
 
@@ -129,12 +130,21 @@ function generateWorld(){
         enemySprites.sprites.push( sprite );
         sprite.direction = Math.random() * 2* Math.PI;
 
-        sprite.$el.tap( function(event){
+
+        var tapHandler =  function(event){
+            //console.log ("tap")
             monsterRoar.play();
             event.preventDefault();
             event.stopPropagation();
             return false;
-        })
+        };
+
+        if ('ontouchstart' in window) {
+            sprite.$el.tap( tapHandler );
+        }
+        else {
+            sprite.$el.on( "mousedown", tapHandler );
+        }
 
     }
 }
@@ -482,37 +492,32 @@ Number.prototype.mod = function(n) {
 }
 
 
-  /*
-function onSoundSuccess() {
-    //nothing for now
+//detect if web or phonegap ( via http://stackoverflow.com/questions/8068052/phonegap-detect-if-running-on-desktop-browser)
+function isPhoneGap() {
+    return ((cordova || PhoneGap || phonegap)
+        && /^file:\/{3}[^\/]/i.test(window.location.href)
+        && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent)) ||
+        window.tinyHippos; //this is to cover phonegap emulator
 }
-function onSoundError(error) {
-    //nothing for now
+
+function initAudio() {
+    if ( isPhoneGap() ) {
+        if (device.platform == "Android") {
+            monsterRoar = new Media("/android_asset/www/assets/sounds/167890__erdie__monster.wav");
+            //bgLoop = new Media( "/android_asset/www/assets/sounds/115261__rap2h__1mi.wav", onSoundSuccess, onSoundError, onSoundStatus);
+        } else {
+            monsterRoar = new Media("assets/sounds/167890__erdie__monster.wav");
+            //bgLoop = new Media( "assets/sounds/115261__rap2h__1mi.wav", onSoundSuccess, onSoundError, onSoundStatus);
+        }
+    }
+    else {
+        monsterRoar = $('<audio src="assets/sounds/167890__erdie__monster.wav" preload="true"></a>').get(0);
+    }
 }
-function onSoundStatus(status) {
-    if( status==Media.MEDIA_STOPPED ) {
-        bgLoop.play();
-    }
-}   */
 
+function init(event) {
 
-document.addEventListener( "deviceready", function(event) {
-
-
-    if (device.platform == "Android") {
-        monsterRoar = new Media("/android_asset/www/assets/sounds/167890__erdie__monster.wav");
-        //bgLoop = new Media( "/android_asset/www/assets/sounds/115261__rap2h__1mi.wav", onSoundSuccess, onSoundError, onSoundStatus);
-    } else {
-        monsterRoar = new Media("assets/sounds/167890__erdie__monster.wav");
-        //bgLoop = new Media( "assets/sounds/115261__rap2h__1mi.wav", onSoundSuccess, onSoundError, onSoundStatus);
-    }
-
-    /*
-    setTimeout( function(){
-        bgLoop.play();
-    }, 1000);
-    */
-
+    initAudio();
 
     $win = $(window);
 
@@ -548,9 +553,18 @@ document.addEventListener( "deviceready", function(event) {
     document.addEventListener( TOUCH_START, onTouchStart );
 
     render();
-});
+};
 
 window.addEventListener( "resize", function() {
     generateWorld();
-})
+});
+
+
+
+if ( isPhoneGap() ) {
+    document.addEventListener( "deviceready", init );
+}
+else {
+    window.addEventListener( "load", init );
+}
 
