@@ -553,6 +553,7 @@ function init(event) {
     document.addEventListener( TOUCH_START, onTouchStart );
 
     render();
+    $("body").css("display", "block");
 };
 
 window.addEventListener( "resize", function() {
