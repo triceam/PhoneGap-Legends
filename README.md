@@ -4,6 +4,9 @@
 
 You can view a preview of this sample app live on devices at http://youtu.be/Pxzk6E6iWMA
 
+There is a live, playable version of this demo for desktop or mobile browsers available at: http://tricedesigns.com/portfolio/phonegap_legends
+However, *only webkit-based browsers are supported* at this time. I've only tested Chrome & Safari on the desktop, Chrome for Android, and Mobile Safari on iOS.
+
 ### Attribution
 
 The following Creative Commons licensed assets were used in the creation of this sample app and the accompanying video:
